@@ -2,12 +2,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			planets: [],
-			characters: [],
+			planet: {},
+			people: [],
 			vehicles: []
-			
+
 		},
 		actions: {
-			getPlanets: () => {
+			getPlanet: (object) => {
 				const myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 
@@ -16,12 +17,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: myHeaders,
 					redirect: "follow"
 				};
-
-				fetch("https://www.swapi.tech/api/planets/", requestOptions)
+				fetch(`https://www.swapi.tech/api/${object}`, requestOptions)
 					.then((response) => response.json())
 					.then((result) => {
 						console.log(result);
-						setStore({ planets: result.results})
+						setStore({ planet: result.result.properties })
+					})
+					.catch((error) => console.error(error));
+			},
+			getPlanets: (object) => {
+				const myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				const requestOptions = {
+					method: "GET",
+					headers: myHeaders,
+					redirect: "follow"
+				};
+				fetch(`https://www.swapi.tech/api/${object}`, requestOptions)
+					// fetch("https://www.swapi.tech/api/planets/", requestOptions)
+					.then((response) => response.json())
+					.then((result) => {
+						console.log(result);
+						setStore({ [object]: result.results })
 					})
 					.catch((error) => console.error(error));
 			},
@@ -29,23 +47,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const requestOptions = {
 					method: "GET",
 					redirect: "follow"
-				  };
-				  
-				  fetch("https://www.swapi.tech/api/people/", requestOptions)
+				};
+
+				fetch("https://www.swapi.tech/api/people/", requestOptions)
 					.then((response) => response.json())
 					.then((result) => {
 						console.log(result);
 						setStore({ characters: result.results })
 					})
 					.catch((error) => console.error(error));
-			}, 
+			},
 			getVehicles: () => {
 				const requestOptions = {
 					method: "GET",
 					redirect: "follow"
-				  };
-				  
-				  fetch("https://www.swapi.tech/api/vehicles/", requestOptions)
+				};
+
+				fetch("https://www.swapi.tech/api/vehicles/", requestOptions)
 					.then((response) => response.json())
 					.then((result) => {
 						console.log(result);

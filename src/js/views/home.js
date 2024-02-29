@@ -15,12 +15,12 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	useEffect(() => {
-		actions.getPlanets();
-		actions.getCharacters();
-		actions.getVehicles();
+		actions.getPlanets("planets");
+		actions.getPlanets("vehicles");
+	
 	}, []);
 
-	console.log(store.planets);
+	console.log(store.vehicles);
 
 	return (
 		<Container className="mt-5">
@@ -48,7 +48,7 @@ export const Home = () => {
 					</div>
 				</Col>
 			</Row>
-			<Row><Col>
+			{/* <Row><Col>
 				<h1 className="text-danger">Characters</h1>
 				<div className="scroll-horizontal">
 					{store.characters.map((character) => {
@@ -57,7 +57,7 @@ export const Home = () => {
 						)
 					})}
 				</div>
-			</Col></Row>
+			</Col></Row>  */}
 		</Container>
 	)
 };
