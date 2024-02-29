@@ -12,7 +12,7 @@ import Image from 'react-bootstrap/Image';
 export const SingleResource = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
-	const resources = params.resource; // Obtener el valor de resource de los parámetros de la ruta
+	const resources = params.resource; 
 
 	//obtener el recurso
 	let resource = '';
@@ -27,7 +27,7 @@ export const SingleResource = props => {
 
 	useEffect(() => {
 		actions.getSWAPIResource(`${resources}/${params.theid}`);
-		console.log('Resource:', resources); // Imprimir el valor de resource en la consola
+		console.log('Resource:', resources); 
 	}, []);
 	console.log(resources);
 	console.log(resource);
