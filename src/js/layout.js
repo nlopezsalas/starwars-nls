@@ -8,6 +8,7 @@ import { Single } from "./views/single";
 import { SinglePlanet } from "./views/singlePlanet";
 import { SingleVehicle } from "./views/singleVehicle";
 import { SingleCharacter } from "./views/singleCharacter";
+import { SingleResource } from "./views/singleResource";
 
 import injectContext from "./store/appContext";
 
@@ -28,10 +29,11 @@ const Layout = () => {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/demo" element={<Demo />} />
-						<Route path="/single/:theid" element={<Single />} />
+						<Route path="/:resource/:theid" element={<SingleResource/>} />
+						{/* <Route path="/single/:theid" element={<Single />} />
 						<Route path="/planets/:theid" element={<SinglePlanet/>} />
-						<Route path="/vehicles/:theid" element={<SingleVehicle/>} />
-						<Route path="/people/:theid" element={<SingleCharacter/>} />
+						<Route path="/vehicles/:theid" element={<SingleVehicle/>} /> */}
+						{/* <Route path="/people/:theid" element={<SingleCharacter/>} /> */}
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
 					<Footer />
