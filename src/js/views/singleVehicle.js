@@ -8,12 +8,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 
-export const SinglePlanet = props => {
+export const SingleVehicle = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 
 	useEffect(() => {
-		actions.getSWAPIResource(`planets/${params.theid}`);
+		actions.getSWAPIResource(`vehicles/${params.theid}`);
 	}, []);
 
 
@@ -22,15 +22,10 @@ export const SinglePlanet = props => {
 			<Container>
 				<Row>
 					<Col>
-						{(params.theid === "1")
-							?
-							<Image src="https://starwars-visualguide.com/assets/img/planets/2.jpg" />
-							:
-							<Image src={`https://starwars-visualguide.com/assets/img/planets/${params.theid}.jpg`} />}
-
+						<Image src={`https://starwars-visualguide.com/assets/img/vehicles/${params.theid}.jpg`} />
 					</Col>
 					<Col>
-						<h1>{store.planet.name}</h1>
+						<h1>{store.vehicle.name}</h1>
 						<p>Lorem ipsum odor amet, consectetuer adipiscing elit. Ac purus in massa egestas mollis varius;
 							dignissim elementum. Mollis tincidunt mattis hendrerit dolor eros enim, nisi ligula ornare.
 							Hendrerit parturient habitant pharetra rutrum gravida porttitor eros feugiat. Mollis elit
@@ -39,8 +34,10 @@ export const SinglePlanet = props => {
 				</Row>
 				<Row className="border-top mt-2 pt-3">
 					<div className="d-flex flex-fill flex-wrap gap-3">
-						{Object.keys(store.planet).map((key, index) => {
-							if (key !== "name" && key !== "url") {
+						{Object.keys(store.vehicle).map((key, index) => {
+							if (key !== "name" && key !== "url" &&
+								typeof store.vehicle[key] !== 'object' &&
+								store.vehicle[key] !== '') {
 								return (
 									<React.Fragment key={key}>
 										<Col className="">
@@ -48,7 +45,7 @@ export const SinglePlanet = props => {
 												<strong>{key.replace(/_/g, ' ').charAt(0).toUpperCase() + key.replace(/_/g, ' ').slice(1)}:</strong>
 											</div>
 											<div className="d-block">
-												{store.planet[key]}
+												{store.vehicle[key]}
 											</div>
 										</Col>
 										{(index + 1) % 5 === 0 && <div className="w-100"></div>}
@@ -71,6 +68,6 @@ export const SinglePlanet = props => {
 	);
 };
 
-SinglePlanet.propTypes = {
+SingleVehicle.propTypes = {
 	match: PropTypes.object
 };
