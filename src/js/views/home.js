@@ -10,11 +10,6 @@ import Col from 'react-bootstrap/Col';
 //components
 import ResourceCard from "../component/resourceCard.js";
 
-// componentes solución 1
-// import planetCard from "../component/planetCard.js";
-// import vehicleCard from "../component/vehicleCard.js";
-// import characterCard from "../component/characterCard.js";
-
 export const Home = () => {
 
 	const { store, actions } = useContext(Context);
@@ -39,7 +34,7 @@ export const Home = () => {
 						<Col>
 							<h1 className="text-danger">{capitalizedResource}</h1>
 							<div className="scroll-horizontal">
-								{/* Aquí utilizamos la notación de corchetes para acceder a la propiedad */}
+								{/******** Aquí utilizamos los de corchetes para acceder a la propiedad ********/}
 								{store[resource].map((element) => (
 									<ResourceCard key={element.uid} uid={element.uid} name={element.name} resource={resource} />
 								))}
@@ -56,7 +51,13 @@ export const Home = () => {
 /////////// ***** PARA REALIZARLO CON LOS ELEMENTOS DIRECTAMENTE ***** ///////////
 // -------------- planets / vehicles / people ----------------------------------//
 
+// IMPORTS 
+// componentes solución 1
+// import planetCard from "../component/planetCard.js";
+// import vehicleCard from "../component/vehicleCard.js";
+// import characterCard from "../component/characterCard.js";
 
+// RETURN 
 // <Container className="mt-5">
 // 	<Row>
 // 		<Col>
