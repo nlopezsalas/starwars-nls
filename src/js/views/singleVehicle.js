@@ -16,6 +16,9 @@ export const SingleVehicle = props => {
 		actions.getSWAPIResource(`vehicles/${params.theid}`);
 	}, []);
 
+	useEffect(() => {
+		actions.getSWAPIResource(`vehicles/${params.theid}`);
+	}, [params]);
 
 	return (
 		<div className="container mt-5">

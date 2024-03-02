@@ -8,7 +8,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			character: {},
 
 			vehicles: [],
-			vehicle: {}
+			vehicle: {},
+
+			favorites: [],
+			resources: ['planets', 'vehicles', 'people']
 
 		},
 		actions: {
@@ -35,6 +38,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					.catch((error) => console.error(error));
+			},
+			addFavorites: (name, uid, resource) => {
+				const newFavorite = {
+					name: name, 
+					id: uid, 
+					url: '/'+resource+'/'+uid,
+					resource: resource
+				}
+				console.log('%cAñadir favorito....'+`${newFavorite.name}`, 'padding: 5px; background-color: purple; color: white');
+				if (!getStore().favorites.find(favorite => favorite.name === name)) {
+					setStore({ favorites: [...getStore().favorites, newFavorite] });
+				}				
+				console.log('/'+resource+'/'+uid);
+			},
+			deleteFavorites: (name) => {
+				console.log("Borrando..." + `${name}`);
+				const newFavorites = getStore().favorites.filter((item) => item !== name );
+				console.log(newFavorites);
+				setStore({ favorites: newFavorites});
 			}
 		}
 	};
