@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
+
+
+//Boostrap
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -10,6 +16,9 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 
 export const MainNavbar = () => {
+
+	const { store, actions } = useContext(Context);
+
 	return (
 		<Navbar bg="dark" data-bs-theme="dark" collapseOnSelect expand="lg" className="bg-body-tertiary">
 			<Container>
@@ -27,15 +36,20 @@ export const MainNavbar = () => {
 					<Nav>
 						<Dropdown>
 							<Dropdown.Toggle variant="primary" id="dropdown-basic">
-								Favorites <Badge pill bg="light" text="dark"> 1 </Badge>
+								Favorites <Badge pill bg="light" text="dark"> {store.favorites.length} </Badge>
 							</Dropdown.Toggle>
 
 							<Dropdown.Menu>
-								<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-								<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-								<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+								{store.favorites.map((favorite) => {
+									return (
+										<Dropdown.Item className="d-flex gap-2 w-100 justify-content-between" href="#/action-1">
+											<div><Link to={favorite.url} resource={favorite.resource}>{favorite.name}</Link></div>
+											<div className="delete-task text-danger" onClick={(e) => actions.deleteFavorites(favorite)}>< FontAwesomeIcon icon={faX} /></div>
+										</Dropdown.Item>
+									)
+								})}
 							</Dropdown.Menu>
-						</Dropdown>
+						</Dropdown> 
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

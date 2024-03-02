@@ -31,6 +31,7 @@ export const SingleResource = props => {
 	}, []);
 	console.log(resources);
 	console.log(resource);
+	console.log(store[resource]);
 	return (
 		<div className="container mt-5">
 			<Container>

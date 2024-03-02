@@ -25,6 +25,7 @@ export const Home = () => {
 		}
 	}, [resources, actions]);
 
+
 	return (
 		<Container className="mt-5">
 			{resources.map((resource) => {
