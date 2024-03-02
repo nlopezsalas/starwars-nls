@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faX } from '@fortawesome/free-solid-svg-icons';
+import { faX, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 //Boostrap
@@ -38,18 +38,20 @@ export const MainNavbar = () => {
 							<Dropdown.Toggle variant="primary" id="dropdown-basic">
 								Favorites <Badge pill bg="light" text="dark"> {store.favorites.length} </Badge>
 							</Dropdown.Toggle>
-
-							<Dropdown.Menu>
-								{store.favorites.map((favorite) => {
-									return (
+							{store.favorites.length > 0 ? (
+								<Dropdown.Menu>
+									{store.favorites.map((favorite) => (
 										<Link key={favorite.id} className="d-flex gap-2 w-100 justify-content-between py-1 px-3" to={favorite.url} resource={favorite.resource}>
 											{favorite.name}
-											<div className="delete-task text-danger" onClick={(e) => actions.deleteFavorites(favorite)}>< FontAwesomeIcon icon={faX} /></div>
+											<div className="delete-task text-danger" onClick={(e) => actions.deleteFavorites(favorite)}><FontAwesomeIcon icon={faX} /></div>
 										</Link>
-									)
-								})}
-							</Dropdown.Menu>
-						</Dropdown> 
+									))}
+								</Dropdown.Menu>
+							) : (
+								<Dropdown.Menu className="py-1 px-3 w-100">There are no favorites</Dropdown.Menu>
+							)}
+
+						</Dropdown>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
