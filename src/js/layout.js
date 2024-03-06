@@ -47,6 +47,7 @@ import { Single } from "./views/single";
 import { SinglePlanet } from "./views/singlePlanet";
 import { SingleVehicle } from "./views/singleVehicle";
 import { SingleCharacter } from "./views/singleCharacter";
+import { SingleResource } from "./views/singleResource";
 
 import injectContext from "./store/appContext";
 
@@ -68,6 +69,9 @@ const Layout = () => {
 						<Route path="/" element={<Home />} />
 						<Route path="/demo" element={<Demo />} />
 						<Route path="/single/:theid" element={<Single />} />
+						{/* <Route path="/planets/:theid" element={<SingleResource />} />
+						<Route path="/vehicles/:theid" element={<SingleResource />} />
+						<Route path="/people/:theid" element={<SingleResource />} /> */}
 						<Route path="/planets/:theid" element={<SinglePlanet/>} />
 						<Route path="/vehicles/:theid" element={<SingleVehicle/>} />
 						<Route path="/people/:theid" element={<SingleCharacter/>} />

@@ -14,11 +14,6 @@ export const SingleCharacter = props => {
     const params = useParams();
     const resource = params.resource; 
 
-    useEffect(() => {
-        actions.getSWAPIResource(`people/${params.theid}`);
-        console.log('Resource:', resource); 
-    }, []);
-
 	useEffect(() => {
 		actions.getSWAPIResource(`people/${params.theid}`);
 	}, [params]);

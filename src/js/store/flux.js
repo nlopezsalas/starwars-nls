@@ -15,48 +15,51 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		},
 		actions: {
-			getSWAPIResource: (object) => {
-				const myHeaders = new Headers();
-				myHeaders.append("Content-Type", "application/json");
+			getSWAPIResource: async (object) => {
+				try {
+					const myHeaders = new Headers();
+					myHeaders.append("Content-Type", "application/json");
 
-				const requestOptions = {
-					method: "GET",
-					headers: myHeaders,
-				};
-				fetch(`https://www.swapi.tech/api/${object}`, requestOptions)
-					.then((response) => response.json())
-					.then((result) => {
-						if (result.hasOwnProperty('results'))
-							// Para '/people', '/planets', '/vehicles'
-							setStore({ [object]: result.results })
-						else {
-							// Para '/people/1', '/planets/1', '/vehicles/1'
-							const objectType = object.split('/')[0].replace(/s$/, '');
-							console.log(`%c${objectType}`, 'color: white; background-color: green;');
-							const resourceName = (objectType === "people") ? "character" : objectType;
-							setStore({ [resourceName]: result.result.properties })
-						}
-					})
-					.catch((error) => console.error(error));
+					const requestOptions = {
+						method: "GET",
+						headers: myHeaders,
+					};
+					let response = await fetch(`https://www.swapi.tech/api/${object}`, requestOptions)
+					let result = await response.json()
+					console.log(result);
+					if (result.hasOwnProperty('results'))
+						// Para '/people', '/planets', '/vehicles'
+						setStore({ [object]: result.results })
+					else {
+						// Para '/people/1', '/planets/1', '/vehicles/1'
+						const objectType = object.split('/')[0].replace(/s$/, '');
+						console.log(`%c${objectType}`, 'color: white; background-color: green;');
+						const resourceName = (objectType === "people") ? "character" : objectType;
+						setStore({ [resourceName]: result.result.properties })
+					}
+
+				} catch (error) {
+					console.error(error)
+				}
 			},
 			addFavorites: (name, uid, resource) => {
 				const newFavorite = {
-					name: name, 
-					id: uid, 
-					url: '/'+resource+'/'+uid,
+					name: name,
+					id: uid,
+					url: '/' + resource + '/' + uid,
 					resource: resource
 				}
-				console.log('%cAñadir favorito....'+`${newFavorite.name}`, 'padding: 5px; background-color: purple; color: white');
+				console.log('%cAñadir favorito....' + `${newFavorite.name}`, 'padding: 5px; background-color: purple; color: white');
 				if (!getStore().favorites.find(favorite => favorite.name === name)) {
 					setStore({ favorites: [...getStore().favorites, newFavorite] });
-				}				
-				console.log('/'+resource+'/'+uid);
+				}
+				console.log('/' + resource + '/' + uid);
 			},
 			deleteFavorites: (name) => {
 				console.log("Borrando..." + `${name}`);
-				const newFavorites = getStore().favorites.filter((item) => item !== name );
+				const newFavorites = getStore().favorites.filter((item) => item !== name);
 				console.log(newFavorites);
-				setStore({ favorites: newFavorites});
+				setStore({ favorites: newFavorites });
 			}
 		}
 	};

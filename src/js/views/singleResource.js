@@ -12,6 +12,7 @@ import Image from 'react-bootstrap/Image';
 export const SingleResource = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
+	console.log(`%c${params.resource}`,'color: red');
 	const resources = params.resource; 
 
 	//obtener el recurso

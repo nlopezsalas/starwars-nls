@@ -12,9 +12,9 @@ export const SinglePlanet = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 
-	useEffect(() => {
-		actions.getSWAPIResource(`planets/${params.theid}`);
-	}, []);
+	// useEffect(() => {
+	// 	actions.getSWAPIResource(`planets/${params.theid}`);
+	// }, []);
 
 	useEffect(() => {
 		actions.getSWAPIResource(`planets/${params.theid}`);
