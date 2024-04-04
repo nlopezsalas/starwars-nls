@@ -14,7 +14,6 @@ import Badge from 'react-bootstrap/Badge';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
-
 export const MainNavbar = () => {
 
 	const { store, actions } = useContext(Context);
